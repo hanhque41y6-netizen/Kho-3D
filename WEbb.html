@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Xem Sản Phẩm 3D</title>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
+    <style>
+        body { margin: 0; background-color: #f0f0f0; font-family: sans-serif; }
+        model-viewer { width: 100vw; height: 100vh; }
+        .error { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; }
+    </style>
+</head>
+<body>
+    <model-viewer 
+        id="viewer"
+        src="" 
+        ar 
+        ar-modes="webxr scene-viewer quick-look" 
+        camera-controls 
+        auto-rotate 
+        shadow-intensity="1">
+    </model-viewer>
+
+    <script>
+        // Code tự động lấy tên file từ đường link QR
+        const urlParams = new URLSearchParams(window.location.search);
+        const modelName = urlParams.get('model');
+        const viewer = document.getElementById('viewer');
+
+        if (modelName) {
+            // Tự động ghép link GitHub của bạn vào
+            // LƯU Ý: Thay 'hanhque41y6-netizen' bằng tên user thật nếu khác
+            viewer.src = `https://raw.githubusercontent.com/hanhque41y6-netizen/Kho-3D/main/${modelName}`;
+        } else {
+            document.body.innerHTML = "<div class='error'><h1>Lỗi!</h1><p>Không tìm thấy tên sản phẩm trong mã QR.</p></div>";
+        }
+    </script>
+</body>
+</html>
